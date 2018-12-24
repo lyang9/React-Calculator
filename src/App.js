@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import AutoShrinkingText from './Shrink';
+import AutoShrinkingText from './components/Shrink';
 
 class App extends Component {
   state = {
