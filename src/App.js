@@ -36,7 +36,8 @@ class App extends Component {
 
     if (waitingForOperand) {
       this.setState({
-        displayValue: String(digit)
+        displayValue: String(digit),
+        waitingForOperand: false 
       })
     } else {
       this.setState({
