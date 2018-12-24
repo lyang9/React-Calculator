@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+  state = {
+    displayValue: '0'
+  }
   render() {
+    const { displayValue } = this.state
+
     return (
       <div className='calculator'>
-        <div className='calculator-display'>0</div>
+        <div className='calculator-display'>{displayValue}</div>
         <div className='calculator-keypad'>
           <div className='input-keys'>
             <div className='function-keys'>
