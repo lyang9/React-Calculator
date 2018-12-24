@@ -3,7 +3,9 @@ import './App.css';
 
 class App extends Component {
   state = {
-    displayValue: '0'
+    displayValue: '0',
+    waitingForOperand: false,
+    operator: null 
   }
 
   clearDisplay() {
@@ -47,11 +49,19 @@ class App extends Component {
     }
   }
 
+  performOperation(operator) {
+    this.setState({
+      waitingForOperand: true,
+      operator: operator
+    })
+  }
+
   render() {
     const { displayValue } = this.state
 
     return (
       <div className='calculator'>
+        {/* <pre>{JSON.stringify(this.state, null, 2)}</pre>  // debugger */}
         <div className='calculator-display'>{displayValue}</div>
         <div className='calculator-keypad'>
           <div className='input-keys'>
@@ -75,11 +85,11 @@ class App extends Component {
             </div>
           </div>
           <div className='operator-keys'>
-            <button className='calculator-key key-divide'>÷</button>
-            <button className='calculator-key key-multiply'>x</button>
-            <button className='calculator-key key-subtract'>-</button>
-            <button className='calculator-key key-add'>+</button>
-            <button className='calculator-key key-equals'>=</button>
+            <button className='calculator-key key-divide' onClick={() => this.performOperation('/')}>÷</button>
+            <button className='calculator-key key-multiply' onClick={() => this.performOperation('*')}>x</button>
+            <button className='calculator-key key-subtract' onClick={() => this.performOperation('-')}>-</button>
+            <button className='calculator-key key-add' onClick={() => this.performOperation('+')}>+</button>
+            <button className='calculator-key key-equals' onClick={() => this.performOperation('=')}>=</button>
           </div>
         </div>
       </div>
