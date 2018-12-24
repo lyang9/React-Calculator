@@ -32,11 +32,17 @@ class App extends Component {
   }
 
   inputDigit(digit) {
-    const { displayValue } = this.state
+    const { displayValue, waitingForOperand } = this.state
 
-    this.setState({
-      displayValue: displayValue === '0' ? String(digit) : displayValue + digit
-    })
+    if (waitingForOperand) {
+      this.setState({
+        displayValue: String(digit)
+      })
+    } else {
+      this.setState({
+        displayValue: displayValue === '0' ? String(digit) : displayValue + digit
+      })
+    }
   }
 
   inputDot() {
