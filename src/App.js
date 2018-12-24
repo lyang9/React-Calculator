@@ -47,9 +47,14 @@ class App extends Component {
   }
 
   inputDot() {
-    const { displayValue } = this.state
+    const { displayValue, waitingForOperand } = this.state
 
-    if (displayValue.indexOf('.') === -1) {
+    if (waitingForOperand) {
+      this.setState({
+        displayValue: '.',
+        waitingForOperand: false
+      })
+    } else if (displayValue.indexOf('.') === -1) {
       this.setState({
         displayValue: displayValue + '.'
       })
