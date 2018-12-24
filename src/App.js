@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import AutoShrinkingText from './Shrink';
 
 class App extends Component {
   state = {
@@ -100,7 +101,7 @@ class App extends Component {
     return (
       <div className='calculator'>
         {/* <pre>{JSON.stringify(this.state, null, 2)}</pre>  // debugger */}
-        <div className='calculator-display'>{displayValue}</div>
+        <AutoShrinkingText className='calculator-display'>{displayValue}</AutoShrinkingText>
         <div className='calculator-keypad'>
           <div className='input-keys'>
             <div className='function-keys'>
