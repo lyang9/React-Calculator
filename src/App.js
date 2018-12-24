@@ -3,6 +3,7 @@ import './App.css';
 
 class App extends Component {
   state = {
+    value: null,
     displayValue: '0',
     waitingForOperand: false,
     operator: null 
@@ -61,10 +62,35 @@ class App extends Component {
     }
   }
 
-  performOperation(operator) {
+  performOperation(nextOperator) {
+    const { displayValue, operator, value } = this.state
+    const nextValue = parseFloat(displayValue)
+
+    const operations = {
+      '/': (preValue, nextValue) => preValue / nextValue,
+      '*': (preValue, nextValue) => preValue * nextValue,
+      '+': (preValue, nextValue) => preValue + nextValue,
+      '-': (preValue, nextValue) => preValue - nextValue,
+      '=': (nextValue) => nextValue
+    }
+
+    if (value == null) {
+      // no previous value, hit a operator key
+      this.setState({
+        value: nextValue
+      })
+    } else if (operator) {
+      const currentValue = value || 0
+      const computedValue = operations[operator](currentValue, nextValue)
+
+      this.setState({
+        value: computedValue,
+        displayValue: String(computedValue)
+      })
+    }
     this.setState({
       waitingForOperand: true,
-      operator: operator
+      operator: nextOperator
     })
   }
 
