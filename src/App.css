@@ -44,10 +44,12 @@ button:active {
 .calculator {
   width: 320px;
   height: 100%;
-  /* background: black; */
+  background: black;
+  margin: 100px auto;
 
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
 }
 
 #wrapper .calculator {
@@ -65,6 +67,7 @@ button:active {
 
 .auto-scaling-text {
   display: inline-block;
+  top: 0;
 }
 
 .calculator-display .auto-scaling-text {

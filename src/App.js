@@ -1,6 +1,47 @@
 import React, { Component } from 'react';
 import './App.css';
-import AutoShrinkingText from './components/Shrink';
+import './index';
+// import AutoShrinkingText from './components/Shrink';
+
+class AutoShrinkingText extends Component {
+  state = {
+    scale: 1
+  }
+
+  componentDidUpdate() {
+    const { scale } = this.state
+
+    const node = this.node
+    const parentNode = node.parentNode
+
+    const availableWidth = parentNode.offsetWidth
+    const actualWidth = node.offsetWidth
+    const actualScale = availableWidth / actualWidth
+
+    if (scale === actualScale)
+      return
+
+    if (actualScale < 1) {
+      this.setState({ scale: actualScale })
+    } else if (scale < 1) {
+      this.setState({ scale: 1 })
+    }
+  }
+
+  render() {
+    const { scale } = this.state
+
+    return (
+      <div
+        className='auto-scaling-text'
+        style={{ transform: `scale(${scale},${scale})` }}
+        ref={node => this.node = node}
+      >
+        {this.props.children}
+      </div>
+    );
+  }
+}
 
 class App extends Component {
   state = {
@@ -8,7 +49,7 @@ class App extends Component {
     displayValue: '0',
     waitingForOperand: false,
     operator: null 
-  }
+  };
 
   clearDisplay() {
     this.setState({
@@ -100,8 +141,9 @@ class App extends Component {
 
     return (
       <div className='calculator'>
-        {/* <pre>{JSON.stringify(this.state, null, 2)}</pre>  // debugger */}
-        <AutoShrinkingText className='calculator-display'>{displayValue}</AutoShrinkingText>
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>  // debugger
+        {/* <AutoShrinkingText className='calculator-display'>{displayValue}</AutoShrinkingText> */}
+        <div className='calculator-display'>{displayValue}</div>
         <div className='calculator-keypad'>
           <div className='input-keys'>
             <div className='function-keys'>
