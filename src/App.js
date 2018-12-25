@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import './index';
-// import AutoShrinkingText from './components/Shrink';
 
 class AutoShrinkingText extends Component {
   state = {
     scale: 1
-  }
+  };
 
   componentDidUpdate() {
     const { scale } = this.state
@@ -99,7 +97,8 @@ class App extends Component {
       })
     } else if (displayValue.indexOf('.') === -1) {
       this.setState({
-        displayValue: displayValue + '.'
+        displayValue: displayValue + '.',
+        waitingForOperand: false
       })
     }
   }
@@ -113,7 +112,7 @@ class App extends Component {
       '*': (preValue, nextValue) => preValue * nextValue,
       '+': (preValue, nextValue) => preValue + nextValue,
       '-': (preValue, nextValue) => preValue - nextValue,
-      '=': (nextValue) => nextValue
+      '=': (preValue, nextValue) => nextValue
     }
 
     if (value == null) {
@@ -141,8 +140,8 @@ class App extends Component {
 
     return (
       <div className='calculator'>
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>  // debugger
-        {/* <AutoShrinkingText className='calculator-display'>{displayValue}</AutoShrinkingText> */}
+        {/* <pre>{JSON.stringify(this.state, null, 2)}</pre>  // debugger */}
+        <AutoShrinkingText className='calculator-display'>{displayValue}</AutoShrinkingText>
         <div className='calculator-display'>{displayValue}</div>
         <div className='calculator-keypad'>
           <div className='input-keys'>
